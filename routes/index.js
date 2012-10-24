@@ -1,16 +1,16 @@
-
-/*
- * GET home page.
- */
-
 exports.index = function(req, res){
     var app = module.parent.exports;
-    var conn = app.set('conn');
-    conn.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-      if (err) throw err;
-      console.log('The solution is: ', rows[0].solution);
-      res.render('index', { title: rows[0].solution });
-      //conn.end();
+    var pool = app.set('pool');
+    var asyncblock = app.set('asyncblock');
+
+    asyncblock(function(flow){
+        pool.acquire(flow.add());
+        var conn = flow.wait();
+        conn.query('SELECT id, name, gender, age FROM node_test_user', flow.add(['rows', 'fields']));
+        var result = flow.wait();
+        //console.log(result);
+
+        res.render('index', { title: 'node test users', users: result['rows'] });
+        pool.release(conn);
     });
 };
-

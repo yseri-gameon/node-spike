@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "node-test",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,6 +8,8 @@
   "dependencies": {
     "express": "3.0.0rc5",
     "ejs": "*",
-    "mysql": "*"
+    "asyncblock": "*"
+    "mysql": "*",
+    "generic-pool": "*",
   }
 }
