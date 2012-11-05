@@ -14,6 +14,7 @@ config = sys.config = require("./config")
 sys.iconv = require('iconv-jp').Iconv
 sys.dnode = require('dnode')
 
+
 sys.pool = generic_pool.Pool(
   name: "mysql"
   create: (cb) ->
